@@ -1,0 +1,282 @@
+/* --- CSS Variables for Easy Theming --- */
+:root {
+    --primary-color: #2563eb; /* A modern, educational blue */
+    --primary-hover: #1d4ed8;
+    --bg-color: #f8fafc;
+    --panel-bg: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --radius: 12px;
+}
+
+/* --- Global Reset & Typography --- */
+* {
+    box-sizing: border-box; /* Crucial for responsive design */
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    padding: 20px;
+    line-height: 1.5;
+}
+
+/* --- Layout Container --- */
+.container {
+    display: flex;
+    flex-direction: row; /* Side by side on desktop */
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+.control-panel, .results-panel {
+    background: var(--panel-bg);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.control-panel {
+    flex: 1;
+    min-width: 320px;
+    position: sticky; /* Keeps controls visible while scrolling results on desktop */
+    top: 20px; 
+}
+
+.results-panel {
+    flex: 2;
+    min-width: 0; /* Prevents flex items from overflowing */
+}
+
+/* --- Headings --- */
+h2 {
+    margin-top: 0;
+    color: var(--text-main);
+    font-size: 1.5rem;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+}
+
+h3 {
+    font-size: 1.1rem;
+    color: var(--text-main);
+}
+
+/* --- Inputs & Forms --- */
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border: 1.5px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.flex-inputs {
+    display: flex;
+    gap: 15px;
+}
+
+.methods-group {
+    background: var(--bg-color);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    border: 1px solid var(--border-color);
+}
+
+.methods-group label {
+    font-weight: normal;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* --- Buttons --- */
+button {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background-color: var(--primary-hover);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* --- Tables --- */
+.table-wrapper {
+    overflow-x: auto; /* Allows horizontal scroll on small screens */
+    margin-top: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap; /* Keeps data on one line */
+}
+
+th, td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background-color: var(--bg-color);
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+tbody tr:hover {
+    background-color: rgba(248, 250, 252, 0.8);
+}
+
+#graph-container {
+    margin-top: 30px;
+    min-height: 300px;
+}
+
+/* =========================================
+   MOBILE RESPONSIVENESS (Media Queries)
+   ========================================= */
+@media (max-width: 850px) {
+    .container {
+        flex-direction: column; /* Stack panels vertically */
+    }
+
+    .control-panel {
+        width: 100%;
+        position: static; /* Remove sticky on mobile */
+    }
+
+    .results-panel {
+        width: 100%;
+        overflow: scroll;
+    }
+
+    /* Stack the side-by-side inputs on very small screens */
+    .flex-inputs {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* --- Graph Container Mobile Fixes --- */
+#graph-container {
+    margin-top: 30px;
+    width: 100%; /* Force it to stay within parent */
+    max-width: 100%;
+}
+
+#plotly-chart {
+    width: 100%;
+    min-height: 350px;
+    /* This prevents Plotly from breaking the container width on resize */
+    overflow: hidden; 
+}
+
+/* Ensure the wrapper doesn't cause horizontal scrolling on the whole page */
+.results-panel {
+    max-width: 100%;
+    overflow-x: hidden; 
+}
+
+/* Adjust the table wrapper inside the results panel so tables scroll, but the panel stays fixed */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+
+/* --- Linear Matrix Grid Styles --- */
+.matrix-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+    flex-wrap: nowrap;
+}
+
+.matrix-input {
+    width: 60px !important; /* Force smaller boxes for the matrix */
+    padding: 8px !important;
+    text-align: center;
+}
+
+.matrix-label {
+    font-weight: bold;
+    color: var(--primary-color);
+    min-width: 30px;
+}
+
+.equals-sign {
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+/* Scrollable container if the matrix gets too big (like 5x5 or 6x6) */
+#matrix-container {
+    overflow-x: auto;
+    padding-bottom: 10px;
+    border: 1px dashed var(--border-color);
+    padding: 15px;
+    border-radius: 8px;
+    background: #fafafa;
+    margin-top: 15px;
+}
+
+
+
+
+
+/* Tiny tweaks for extra small phones */
+@media (max-width: 400px) {
+    body {
+        padding: 10px;
+    }
+    
+    .control-panel, .results-panel {
+        padding: 20px;
+    }
+}

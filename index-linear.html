@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear System Solver</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="control-panel">
+        <h2>Linear Equations (AX = B)</h2>
+        
+        <div class="input-group">
+            <label for="matrix-size">Number of Variables (n):</label>
+            <div class="flex-inputs">
+                <input type="number" id="matrix-size" value="3" min="2" max="6">
+                <button id="generate-btn" style="width: auto; padding: 10px 20px;">Create Grid</button>
+            </div>
+        </div>
+
+        <div id="matrix-container"></div>
+
+        <div class="methods-group" style="margin-top: 20px;">
+            <h3>Select Method:</h3>
+            <label><input type="radio" name="linear-method" value="gauss" checked> Gauss Elimination (Direct)</label>
+            <label><input type="radio" name="linear-method" value="gaussjordan"> Gauss-Jordan (Direct)</label> <label><input type="radio" name="linear-method" value="cholesky"> Cholesky Method (Direct)</label>
+            <label><input type="radio" name="linear-method" value="crout"> Crout's Reduction (LU)</label>
+            <label><input type="radio" name="linear-method" value="seidel"> Gauss-Seidel (Iterative)</label>
+            <label><input type="radio" name="linear-method" value="jacobi"> Jacobi Method (Iterative)</label>
+        </div>
+
+
+        <button id="solve-linear-btn">Solve System</button>
+    </div>
+
+    <div class="results-panel">
+        <h2>Solution Dashboard</h2>
+        <div id="linear-results">
+            <p style="text-align:center; color:var(--text-muted); padding-top:40px;">Set up your matrix and click Solve.</p>
+        </div>
+    </div>
+</div>
+
+<script src="linear.js"></script>
+<script src="./linear-methods/gauss-elimination.js"></script>
+<script src="./linear-methods/gauss-seidel.js"></script>
+<script src="./linear-methods/jacobi.js"></script>
+<script src="./linear-methods/cholesky.js"></script>
+<script src="./linear-methods/crout.js"></script>
+<script src="./linear-methods/gauss-jordan.js"></script>
+
+</body>
+</html>

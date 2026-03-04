@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Non-Linear Equation Solver</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="control-panel">
+        <h2>Non-Linear Solver</h2>
+        
+        <div class="input-group">
+            <label for="equation">Function f(x):</label>
+            <input type="text" id="equation" placeholder="e.g., x^3 - 4*x - 9" required>
+        </div>
+
+        <div class="input-group">
+            <label>Interval [a, b] (For Bisection/False Position)<br>[x0, x1] (for Secant):</label>
+            <div class="flex-inputs">
+                <input type="number" id="guess-a" placeholder="a or x1 (e.g., 2)">
+                <input type="number" id="guess-b" placeholder="b or x1 (e.g., 3)">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="guess-x0">Initial Guess x0 (For Newton's):</label>
+            <input type="number" id="guess-x0" placeholder="x0 (e.g., 2.5)">
+        </div>
+
+        <div class="input-group">
+            <label>Stopping Criteria:</label>
+            <div class="flex-inputs">
+                <input type="number" id="tolerance" placeholder="Tolerance (e.g., 0.0001)" value="0.0001">
+                <input type="number" id="max-iter" placeholder="Max Iterations" value="50">
+            </div>
+        </div>
+
+        <div class="methods-group">
+            <h3>Select Methods to Compare:</h3>
+            <label><input type="checkbox" id="method-bisection" checked> Bisection Method</label><br>
+            <label><input type="checkbox" id="method-newton" checked> Newton-Raphson Method</label><br>
+            <label><input type="checkbox" id="method-false-position"> False Position Method</label>
+            <label><input type="checkbox" id="method-secant" checked> Secant Method</label>
+            <label><input type="checkbox" id="method-muller" checked> Muller's Method</label>
+        </div>
+
+        <button id="solve-btn">Calculate & Compare</button>
+    </div>
+
+    <div class="results-panel">
+        <h2>Results Dashboard</h2>
+        <div id="winner-banner" class="hidden">
+            </div>
+        
+        <table id="results-table">
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Root Approximate</th>
+                    <th>Iterations</th>
+                    <th>Final Error</th>
+                </tr>
+            </thead>
+            <tbody id="results-body">
+                </tbody>
+        </table>
+
+        <div id="graph-container">
+            <p style="text-align:center; color:#888; padding-top:40px;">Graph will appear here</p>
+        </div>
+    </div>
+</div>
+<script src="./non-linear-methods/bisection.js"></script>
+<script src="./non-linear-methods/newton.js"></script>
+<script src="./non-linear-methods/falseposition.js"></script>
+<script src="./non-linear-methods/secant.js"></script>
+<script src="./non-linear-methods/muller.js"></script>
+
+<script src="nlmain.js"></script>
+</body>
+</html>
