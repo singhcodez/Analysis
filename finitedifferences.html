@@ -29,13 +29,17 @@
                 <input type="text" id="y-values" placeholder="e.g., 46, 66, 81, 93, 101" value="46, 66, 81, 93, 101">
             </div>
 
-            <div class="input-group" style="margin-top: 25px; border-top: 1px solid var(--border-color); padding-top: 20px;">
+             <div class="input-group" style="margin-top: 25px; border-top: 1px solid var(--border-color); padding-top: 20px;">
                 <label for="interpolate-x">Find Y when X = (Interpolate):</label>
                 <input type="number" id="interpolate-x" placeholder="e.g., 15" value="15" style="border-color: var(--primary-color);">
                 
-                <div style="background: #e0e7ff; color: var(--primary-dark); padding: 12px; border-radius: 6px; margin-top: 15px; font-size: 0.85em; border-left: 4px solid var(--primary-color);">
-                    <strong>💡 Smart Auto-Select:</strong><br> 
-                    The algorithm automatically uses <strong>Newton's Forward Method</strong> if your target X is closer to the beginning of the data, and <strong>Newton's Backward Method</strong> if it is closer to the end.
+                <div class="methods-group" style="margin-top: 15px; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="margin-top: 0; color: var(--text-main); font-size: 0.95em;">Select Interpolation Method:</h4>
+                    <label><input type="radio" name="interp-method" value="auto" checked> 🤖 Auto-Select (Best Fit)</label>
+                    <label><input type="radio" name="interp-method" value="forward"> ↗️ Newton's Forward</label>
+                    <label><input type="radio" name="interp-method" value="backward"> ↘️ Newton's Backward</label>
+                    <label><input type="radio" name="interp-method" value="stirling"> 🎯 Stirling's Central</label>
+                          <label style="display:block;"><input type="radio" name="interp-method" value="bessel"> ⚖️ Bessel's Central</label>
                 </div>
             </div>
 
@@ -54,8 +58,12 @@
     </div>
 </div>
 
+
+
 <script src="./finitedifference/newtonforward.js"></script>
 <script src="./finitedifference/newtonBackward.js"></script>
+<script src="./finitedifference/stirling.js"></script>
+<script src="./finitedifference/bessel.js"></script>
 <script src="finitedifferences.js"></script>
 
 </body>

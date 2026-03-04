@@ -51,38 +51,59 @@ document.getElementById('generate-table-btn').addEventListener('click', () => {
     html += `</tbody></table></div>`;
     tableContainer.innerHTML = html;
 
-    // --- 2. INTELLIGENT INTERPOLATION SELECTOR ---
+    // --- 2. INTERPOLATION LOGIC ---
     if (targetXStr.trim() !== "") {
         const targetX = parseFloat(targetXStr);
-        
-        // Find the midpoint of the data
-        const midPoint = (x[0] + x[x.length - 1]) / 2;
+        const selectedMethod = document.querySelector('input[name="interp-method"]:checked').value;
         
         let resultData;
         let methodName = "";
         let methodColor = "";
 
-        // Auto-select algorithm based on targetX position
-        if (targetX <= midPoint) {
-            // Target is in the first half -> Use Forward (Blue)
-            resultData = solveNewtonForward(x, y, diffTable, targetX);
-            methodName = "Newton's Forward Method";
-            methodColor = "var(--primary-color)"; // Blue
-        } else {
-            // Target is in the second half -> Use Backward (Orange)
-            resultData = solveNewtonBackward(x, y, diffTable, targetX);
-            methodName = "Newton's Backward Method";
-            methodColor = "#f59e0b"; // Orange
+        // Determine which method to use based on Radio Buttons
+        let methodToRun = selectedMethod;
+
+        if (selectedMethod === "auto") {
+            // Split the data range into thirds to auto-select
+            const range = x[x.length - 1] - x[0];
+            const lowerThird = x[0] + (range / 3);
+            const upperThird = x[x.length - 1] - (range / 3);
+
+            if (targetX <= lowerThird) methodToRun = "forward";
+            else if (targetX >= upperThird) methodToRun = "backward";
+            else methodToRun = "stirling";
         }
 
+        // Execute the selected method
+        if (methodToRun === "forward") {
+            resultData = solveNewtonForward(x, y, diffTable, targetX);
+            methodName = selectedMethod === "auto" ? "Newton's Forward (Auto-Selected)" : "Newton's Forward Method";
+            methodColor = "var(--primary-color)"; // Blue
+        }
+        else if (methodToRun === "backward") {
+            resultData = solveNewtonBackward(x, y, diffTable, targetX);
+            methodName = selectedMethod === "auto" ? "Newton's Backward (Auto-Selected)" : "Newton's Backward Method";
+            methodColor = "#f59e0b"; // Orange
+        } 
+        else if (methodToRun === "stirling") {
+            resultData = solveStirling(x, y, diffTable, targetX);
+            methodName = selectedMethod === "auto" ? "Stirling's Central (Auto-Selected)" : "Stirling's Central Method";
+            methodColor = "#10b981"; // Green
+        }
+        else if (methodToRun === "bessel") {
+            resultData = solveBessel(x, y, diffTable, targetX);
+            methodName = "Bessel's Central Method";
+            methodColor = "#8b5cf6"; // Purple
+        }
+
+        // Render Results
         if (resultData.error) {
             resultContainer.innerHTML = `<p style="color:red; font-weight:bold;">Warning: ${resultData.error}</p>`;
         } else {
-            // Render the Answer Card, dynamically colored based on the method used!
             resultContainer.innerHTML = `
                 <div style="background: white; border: 2px solid ${methodColor}; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
                     <h3 style="color: ${methodColor}; margin-top: 0;">Interpolation Result</h3>
-                    <p style="font-size: 1.1em; margin-bottom: 5px;">Auto-selected <strong>${methodName}</strong> for target <strong>X = ${targetX}</strong>:</p>
+                    <p style="font-size: 1.1em; margin-bottom: 5px;">Using <strong>${methodName}</strong> for target <strong>X = ${targetX}</strong>:</p>
                     <p style="font-size: 1.1em; margin: 0;">Step size (h) = ${resultData.h}</p>
                     <p style="font-size: 1.1em; margin: 0;">Ratio (p) = ${resultData.p.toFixed(4)}</p>
                     <div style="font-size: 1.8em; font-weight: bold; color: #0f172a; margin-top: 15px; text-align: center; background: #f8fafc; padding: 10px; border-radius: 6px;">
@@ -92,5 +113,4 @@ document.getElementById('generate-table-btn').addEventListener('click', () => {
             `;
         }
     }
-}); // End of event listener
-
+});
