@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathLab | Numerical Analysis</title>
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* --- Modern Gradient Header --- */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            padding: 4rem 2rem 6rem 2rem; /* Extra padding at bottom for cards to overlap */
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- Overlapping Grid Layout --- */
+        .container {
+            max-width: 1200px;
+            margin: -4rem auto 3rem auto; /* Negative top margin pulls grid UP over the header */
+            padding: 0 1.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* --- Sleek Tool Cards --- */
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            border-color: #cbd5e1;
+        }
+
+        /* Category Badge */
+        .badge {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: #e0e7ff;
+            color: var(--primary-dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: #f1f5f9;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            border-radius: 12px;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        /* Styling for tools you are still building */
+        .card.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background: #f8fafc;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .card.disabled:hover {
+            transform: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-color: transparent;
+        }
+
+        .card.disabled .badge {
+            background: #e2e8f0;
+            color: #64748b;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .hero { padding: 3rem 1rem 5rem 1rem; }
+            .hero h1 { font-size: 2rem; }
+            .container { margin-top: -3rem; }
+            .card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>MathLab Hub</h1>
+        <p>Your interactive sandbox for exploring numerical analysis algorithms.</p>
+    </header>
+
+    <main class="container">
+        <div class="grid">
+            
+            <a href="nonlinear.html" class="card">
+                <span class="badge">Roots</span>
+                <div class="icon">📉</div>
+                <h3>Non-Linear Equations</h3>
+                <p>Find the roots of complex functions using Bisection, Newton-Raphson, Secant, and Muller's methods.</p>
+            </a>
+
+            <a href="linear.html" class="card">
+                <span class="badge">Matrices</span>
+                <div class="icon">🧮</div>
+                <h3>Linear Systems</h3>
+                <p>Solve multi-variable equations (AX = B) using Gauss Elimination, Cholesky, Crout's, and Iterative methods.</p>
+            </a>
+
+            <a href="#" class="card disabled">
+                <span class="badge">Data</span>
+                <div class="icon">📊</div>
+                <h3>Finite Differences</h3>
+                <p>Generate Forward, Backward, and Central difference tables from discrete data points. <em>(Coming Soon)</em></p>
+            </a>
+
+            <a href="#" class="card disabled">
+                <span class="badge">Curves</span>
+                <div class="icon">🔗</div>
+                <h3>Interpolation</h3>
+                <p>Connect the dots using Newton's and Lagrangian interpolation formulas. <em>(Coming Soon)</em></p>
+            </a>
+
+            <a href="#" class="card disabled">
+                <span class="badge">Calculus</span>
+                <div class="icon">📐</div>
+                <h3>Numerical Integration</h3>
+                <p>Calculate areas under curves using Trapezoidal and Simpson's rules. <em>(Coming Soon)</em></p>
+            </a>
+
+            <a href="#" class="card disabled">
+                <span class="badge">Physics</span>
+                <div class="icon">⏱️</div>
+                <h3>Differential Equations</h3>
+                <p>Simulate dynamic systems using Euler's and Runge-Kutta (RK4) methods. <em>(Coming Soon)</em></p>
+            </a>
+
+        </div>
+    </main>
+
+</body>
+</html>
