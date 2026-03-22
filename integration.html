@@ -15,6 +15,35 @@
     <div class="container" style="margin: 0;">
         <div class="control-panel">
             <h2>Data Input (Integration)</h2>
+           
+           <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; border: 1px solid #bae6fd; margin-bottom: 25px;">
+                <h3 style="margin-top: 0; color: var(--primary-dark); font-size: 1.1em;">Generate Data from Equation</h3>
+                
+                <div class="input-group">
+                    <label for="eq-func">Function f(x):</label>
+                    <input type="text" id="eq-func" placeholder="e.g., 1/(1+x^2) or sin(x)" style="border-color: #7dd3fc;">
+                </div>
+                
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <div class="input-group" style="flex: 1;">
+                        <label for="eq-a">Lower Limit (a):</label>
+                        <input type="number" id="eq-a" value="0">
+                    </div>
+                    <div class="input-group" style="flex: 1;">
+                        <label for="eq-b">Upper Limit (b):</label>
+                        <input type="number" id="eq-b" value="1">
+                    </div>
+                    <div class="input-group" style="flex: 1;">
+                        <label for="eq-n">Intervals (n):</label>
+                        <input type="number" id="eq-n" value="6">
+                    </div>
+                </div>
+                
+                <button id="generate-xy-btn" style="margin-top: 15px; background: #0284c7; width: 100%;">Generate X & Y Data</button>
+            </div>
+            
+            <h3 style="color: var(--text-main); font-size: 1.1em; border-bottom: 1px solid var(--border-color); padding-bottom: 5px;">Raw Data</h3>
+           
             <p style="color: var(--text-muted); margin-bottom: 15px; font-size: 0.9em;">
                 Enter your equally-spaced data points to calculate the area under the curve.
             </p>
@@ -35,6 +64,9 @@
                 <label style="display:block; margin-bottom:5px;"><input type="radio" name="integ-method" value="trap"> 📐 Trapezoidal Rule (Any intervals)</label>
                 <label style="display:block; margin-bottom:5px;"><input type="radio" name="integ-method" value="simp13"> 🎢 Simpson's 1/3 Rule (Even intervals)</label>
                 <label style="display:block;"><input type="radio" name="integ-method" value="simp38"> 🌊 Simpson's 3/8 Rule (Multiples of 3)</label>
+                <label style="display:block;"><input type="radio" name="integ-method" value="romberg"> 🎯 Romberg Integration (Power of 2 intervals)
+                </label>
+                </div>
             </div>
 
             <button id="calculate-area-btn" style="margin-top: 20px;">Calculate Area</button>
@@ -52,6 +84,7 @@
 <script src="./Integration/trapezoidal.js"></script>
 <script src="./Integration/simpson13.js"></script>
 <script src="./Integration/simpson38.js"></script>
+<script src="./Integration/romberg.js"></script>
 <script src="integration.js"></script>
 </body>
 </html>
