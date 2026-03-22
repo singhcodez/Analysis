@@ -67,6 +67,11 @@ document.getElementById('solve-ode-btn').addEventListener('click', () => {
         methodName = "Picard's Successive Approximations";
         methodColor = "#f59e0b"; // Amber
     }
+    else if (method === "milne") {
+        resultData = solveMilne(f, x0, y0, targetX, h);
+        methodName = "Milne's Predictor-Corrector";
+        methodColor = "#ec4899"; // Pink
+    }
 
     // Render Output
     if (resultData.error) {
@@ -124,7 +129,21 @@ document.getElementById('solve-ode-btn').addEventListener('click', () => {
                 <td><strong>${s.y_approx}</strong></td></tr>`;
             });
         }
-     
+            else if (method === "milne") {
+            html += `<tr><th>Step</th><th>Phase</th><th>x</th><th>Predicted y (p)</th><th>Corrected y (c)</th><th>Final y</th></tr></thead><tbody>`;
+            resultData.steps.forEach(s => {
+                let rowStyle = s.phase === "RK4 Bootstrap" ? "background-color: #f8fafc; color: #64748b;" : "";
+                html += `<tr style="${rowStyle}">
+                            <td>${s.step}</td>
+                            <td><em>${s.phase}</em></td>
+                            <td>${s.x}</td>
+                            <td>${s.yp}</td>
+                            <td>${s.yc}</td>
+                            <td><strong>${s.y}</strong></td>
+                         </tr>`;
+            });
+        }
+         
         html += `</tbody></table></div></div>`;
         resultContainer.innerHTML = html;
     }

@@ -74,7 +74,8 @@
                  <label style="display:block; margin-bottom:5px;"><input type="radio" name="ode-method" value="taylor">  Taylor Series(3rd order)</label>
                 
                <label style="display:block;"><input type="radio" name="ode-method" value="picard"> 🔄 Picard's Method (Successive Approx.)</label>
-
+                <label style="display:block;"><input type="radio" name="ode-method" value="milne"> 🔮 Milne's Predictor-Corrector
+                <em style="font-size:0.8em;">(calculate next y(x1),y(x2)...values using rk4 method)</em></label>
             </div>
 
             <button id="solve-ode-btn" style="margin-top: 20px;">Solve ODE</button>
@@ -96,6 +97,7 @@
 <script src="./ode/runge-kutta.js" ></script>
 <script src="./ode/taylor.js" ></script>
 <script src="./ode/picard.js" ></script>
+<script src="./ode/milne.js"></script>
 
 </body>
 </html>
