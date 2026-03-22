@@ -70,23 +70,36 @@ document.getElementById('calculate-area-btn').addEventListener('click', () => {
     let n_display = "N/A";
     let h_display = "N/A";
 
-    // GAUSS-LEGENDRE BYPASS
-    if (selectedMethod === "gauss2" || selectedMethod === "gauss3") {
+  // --- ADVANCED QUADRATURE BYPASS (Gauss & Chebyshev) ---
+    if (selectedMethod === "advanced") {
+        const advMethod = document.getElementById('advanced-method-select').value;
         const funcStr = document.getElementById('eq-func').value;
         const a = parseFloat(document.getElementById('eq-a').value);
         const b = parseFloat(document.getElementById('eq-b').value);
 
         if (!funcStr || isNaN(a) || isNaN(b)) {
-            resultContainer.innerHTML = `<p style="color:red; font-weight:bold;">Error: Gauss-Legendre requires the f(x) Equation, Lower Limit (a), and Upper Limit (b) to be filled out above.</p>`;
+            resultContainer.innerHTML = `<p style="color:red; font-weight:bold;">Error: Advanced Quadrature requires the f(x) Equation, Lower Limit (a), and Upper Limit (b) to be filled out.</p>`;
             return;
         }
 
-        let points = selectedMethod === "gauss2" ? 2 : 3;
-        resultData = solveGaussLegendre(funcStr, a, b, points);
-        methodName = `Gauss-Legendre (${points}-Point)`;
-        methodColor = "#b91c1c"; 
-        n_display = `Evaluated at ${points} optimal points`;
+        // Route to Gauss-Legendre
+        if (advMethod.startsWith("gauss")) {
+            let points = parseInt(advMethod.replace("gauss", ""));
+            resultData = solveGaussLegendre(funcStr, a, b, points);
+            methodName = `Gauss-Legendre Quadrature (${points}-Point)`;
+            methodColor = "#be123c"; // Crimson
+            n_display = `Evaluated at ${points} optimal roots`;
+        } 
+        // Route to Chebyshev
+        else if (advMethod.startsWith("cheby")) {
+            let points = parseInt(advMethod.replace("cheby", ""));
+            resultData = solveChebyshev(funcStr, a, b, points);
+            methodName = `Gauss-Chebyshev (${points}-Point Formula)`;
+            methodColor = "#c2410c"; // Burnt Orange
+            n_display = `Evaluated at ${points} `;
+        }
     } 
+    
     // DISCRETE DATA LOGIC
     else {
         const xInput = document.getElementById('x-values').value;

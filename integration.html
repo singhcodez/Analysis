@@ -67,9 +67,16 @@
                 <label style="display:block;"><input type="radio" name="integ-method" value="romberg"> 🎯 Romberg Integration (Power of 2 intervals)
                 </label>
                 
-                <label style="display:block; margin-bottom:5px; color: #b91c1c;"><input type="radio" name="integ-method" value="gauss2"> 🧲 Gauss-Legendre (2-Point) *</label>
-                <label style="display:block; color: #b91c1c;"><input type="radio" name="integ-method" value="gauss3"> 🧲 Gauss-Legendre (3-Point) *</label>
-                <p style="font-size: 0.8em; color: var(--text-muted); margin-top: 8px; font-style: italic;">* Gauss methods ignore raw data and calculate directly from the f(x) Equation Generator.</p>
+               <input type="radio" name="integ-method" value="advanced"> 🧲 Advanced Quadrature (Equation Only)
+                    </label>
+                    <select id="advanced-method-select" style="width: 100%; padding: 5px; margin-top: 5px; border-color: #fda4af; color: #9f1239;">
+                        <option value="gauss2">Gauss-Legendre (2-Point)</option>
+                        <option value="gauss3">Gauss-Legendre (3-Point)</option>
+                        <option value="cheby1">Gauss-Chebyshev (1-Point Formula)</option>
+                        <option value="cheby2">Gauss-Chebyshev (2-Point Formula)</option>
+                        <option value="cheby3">Gauss-Chebyshev (3-Point Formula)</option>
+                    </select>
+                <p style="font-size: 0.8em; color: var(--text-muted); margin-top: 8px; font-style: italic;">* Gauss & chebyshev methods ignore raw data and calculate directly from the f(x) Equation Generator.</p>
                 
                 </div>
             </div>
@@ -91,6 +98,8 @@
 <script src="./Integration/simpson38.js"></script>
 <script src="./Integration/romberg.js"></script>
 <script src="./Integration/gausslegendre.js"></script>
+<script src="./Integration/guasschebyshev.js"></script>
+
 <script src="integration.js"></script>
 </body>
 </html>
